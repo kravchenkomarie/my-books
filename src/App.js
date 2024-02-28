@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import CounterClass from './CounterClass';
+import { CounterFunction } from './CounterFunction';
 
 function App() {
+  let [counter, setCounter] = useState(0);
+
+  const increaseCounter = () => {
+    setCounter((counter += 1));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <CounterClass name={'Max'}>
+        Children props внутри тегов компонента
+      </CounterClass>
+      <CounterFunction name={'Maria'} counter={counter} increaseCounter={increaseCounter}>
+        Hello Function!
+      </CounterFunction>
     </div>
   );
 }

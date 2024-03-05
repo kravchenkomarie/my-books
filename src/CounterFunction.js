@@ -1,42 +1,64 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect, forwardRef } from 'react';
 
-export const CounterFunction = ({ name, children, counter, increaseCounter }) => {
-  if (!name) {
-    name = 'default Name';
-  }
+export const CounterFunction = forwardRef(
+  ({ name, children, counter, increaseCounter, setCounter }) => {
+    if (!name) {
+      name = 'default Name';
+    }
+    const timerId = useRef(0);
+    let [text, setText] = useState('');
+    let [showInput, setShowInput] = useState(true);
 
-  let [text, setText] = useState('');
-  let [showInput, setShowInput] = useState(true);
+    //   const handleInput = (event) => {
+    //     console.log(event.target.value);
+    //   };
 
-  //   const handleInput = (event) => {
-  //     console.log(event.target.value);
-  //   };
+    //   const handleInput = (event) => {
+    //     console.log(event.target.value);
+    //     setText(event.target.value);
+    //   };
 
-  //   const handleInput = (event) => {
-  //     console.log(event.target.value);
-  //     setText(event.target.value);
-  //   };
+    useEffect(() => {
+      const id = setInterval(() => setCounter((counter += 1)), 1000);
+      timerId.current = id; // использовать либюо внутри useEffect, либо внутри каких-то функций, а не во время рендеринга (в коде без функции)
+      console.log(timerId.current);
+      return () => {};
+    }, []);
 
+    const inputRef = useRef(null);
 
-  return (
-    <div>
-      <p>CounterFunction</p>
-      <p>{counter}</p>
-      <p>{text}</p>
-      {/* <p>{name}</p>
+    const handleClick = () => {
+      console.log(inputRef.current);
+      console.log(inputRef.current.value);
+    };
+
+    return (
+      <div>
+        <p>CounterFunction</p>
+        <p>{counter}</p>
+        <p>{text}</p>
+        {/* <p>{name}</p>
       <p>{children}</p> */}
 
-      <button onClick={increaseCounter}>click</button>
-      {/* <input type='text' onInput={(event) => handleInput(event)}></input> */}
-      <button onClick={() => setShowInput(!showInput)}>
+        <button onClick={increaseCounter}>Запустить счетчик</button>
+        <button onClick={() => clearInterval(timerId.current)}>
+          Остановить счетчик
+        </button>
+
+        <input type='text' ref={inputRef}></input>
+        <button onClick={handleClick}>Показать ref</button>
+        {/* <input type='text' onInput={(event) => handleInput(event)}></input> */}
+        {/* <button onClick={() => setShowInput(!showInput)}>
         {showInput ? 'Скрыть' : 'Показать'}
       </button>
       {showInput && (
         <input
+          
           type='text'
           onInput={(event) => setText(event.target.value)}
         ></input>
-      )}
-    </div>
-  );
-};
+      )} */}
+      </div>
+    );
+  }
+);

@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, forwardRef } from 'react';
+import { useState, useRef, useEffect, forwardRef, useContext } from 'react';
+import Language from './Language';
 
 export const CounterFunction = forwardRef(
   ({ name, children, counter, increaseCounter, setCounter }) => {
@@ -25,7 +26,9 @@ export const CounterFunction = forwardRef(
       return () => {};
     }, []);
 
+    let MyContext;
     const inputRef = useRef(null);
+    // const value = useContext(MyContext);
 
     const handleClick = () => {
       console.log(inputRef.current);
@@ -47,6 +50,7 @@ export const CounterFunction = forwardRef(
 
         <input type='text' ref={inputRef}></input>
         <button onClick={handleClick}>Показать ref</button>
+        <Language />
         {/* <input type='text' onInput={(event) => handleInput(event)}></input> */}
         {/* <button onClick={() => setShowInput(!showInput)}>
         {showInput ? 'Скрыть' : 'Показать'}

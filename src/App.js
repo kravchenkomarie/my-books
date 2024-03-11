@@ -1,52 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import CounterClass from './CounterClass';
-import { CounterFunction } from './CounterFunction';
-
-// const lang = {
-//   lang: 'RU',
-// };
-
-export const LangContext = React.createContext({});
+import MainPage from './components/MainPage/MainPage';
+import Header from './components/Header/Header';
+import About from './components/About/About';
 
 function App() {
-  let [counter, setCounter] = useState(0);
-
-  const counterRef = useRef(null);
-
-  const increaseCounter = () => {
-    setCounter((counter += 1));
-  };
-
-  let [lang, setlang] = useState('RU');
-
   return (
-    <div className='App'>
-      <CounterClass name={'Max'}>
-        Children props внутри тегов компонента
-      </CounterClass>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <CounterFunction
-          ref={counterRef}
-          name={'Maria'}
-          counter={counter}
-          increaseCounter={increaseCounter}
-          setCounter={setCounter}
-        >
-          Hello Function!
-        </CounterFunction>
-      </LangContext.Provider>
-
-      {/* <CounterFunction
-        ref={counterRef}
-        name={'Maria'}
-        counter={counter}
-        increaseCounter={increaseCounter}
-        setCounter={setCounter}
-      >
-        Hello Function!
-      </CounterFunction> */}
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path='/' element={<MainPage />}></Route>
+          <Route path='about' element={<About />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

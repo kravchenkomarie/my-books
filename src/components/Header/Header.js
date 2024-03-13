@@ -4,9 +4,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
+  
   useEffect(() => {
     console.log(location);
   }, [location]);
+
   return (
     <div>
       <Link to='/'>Главная</Link>

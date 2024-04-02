@@ -1,65 +1,17 @@
-import React, { useContext, useState } from 'react';
-import { ModalContext } from '../../App';
+import React, { useState } from 'react';
 import { addExpense } from '../../data/expenses';
 
-// export default function AddExpensesModal() {
-//   const modalContext = useContext(ModalContext);
-//   const isDisable =
-//     modalContext.sum.trim() !== '' && modalContext.date !== '' ? false : true;
-//   // let id = Date.now();
-
-//   return (
-//     <div>
-//       <div onClick={(e) => e.stopPropagation()}>
-//         <label>Сумма</label>
-//         <input
-//           type='text'
-//           name='sum'
-//           value={modalContext.sum}
-//           onChange={modalContext.handleInputChange}
-//         ></input>
-//         <label>Дата</label>
-//         <input
-//           type='date'
-//           name='date'
-//           value={modalContext.date}
-//           onChange={modalContext.handleInputChange}
-//         ></input>
-//         <label>Комментрий</label>
-//         <input
-//           type='text'
-//           name='comment'
-//           value={modalContext.comment}
-//           onChange={modalContext.handleInputChange}
-//         ></input>
-//         <button
-//           disabled={isDisable}
-//           onClick={() => {
-//             addExpense(
-//               modalContext.sum,
-//               // modalContext.categotyName,
-//               modalContext.date,
-//               modalContext.comment,
-//               modalContext.selectedCategoryName,
-//               // categoryName
-//               // modalContext.setComment
-//             );
-//           }}
-//         >
-//           Добавить расход
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-export default function AddExpensesModal({ selectedCategoryName }) {
+export default function AddExpensesModal({
+  selectedCategoryName,
+  openExpensesModal,
+}) {
   const [sum, setSum] = useState('');
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
 
   const handleAddExpense = () => {
     addExpense(sum, date, comment, selectedCategoryName, setComment);
+    openExpensesModal();
   };
 
   return (
@@ -67,7 +19,7 @@ export default function AddExpensesModal({ selectedCategoryName }) {
       <div onClick={(e) => e.stopPropagation()}>
         <label>Сумма</label>
         <input
-          type='text'
+          type='number'
           name='sum'
           value={sum}
           onChange={(e) => setSum(e.target.value)}

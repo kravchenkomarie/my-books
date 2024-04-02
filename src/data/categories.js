@@ -12,6 +12,5 @@ export const addCategory = async (name, src, setText) => {
     name: name,
     imgUrl: src,
   });
-  // setText('')
   return response;
 };

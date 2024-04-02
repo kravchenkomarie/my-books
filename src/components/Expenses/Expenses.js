@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
-import { ModalContext } from '../../App';
 import { getExpenses } from '../../data/expenses';
 
 export default function Expences() {
   const [expenses, setExpenses] = useState([]);
+  const [sumExpenses, setSumExpenses] = useState();
 
   useEffect(() => {
     getExpenses().then((res) => {
       setExpenses(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    let total = 0;
+    expenses.forEach((el) => {
+      total += Number(el.price);
+    });
+    setSumExpenses(total);
+  }, [expenses]);
+
   return (
-    <ModalContext.Provider value={{}}>
+    <div>
       <div>Фильтры</div>
       <div className={styles.title}>Расходы</div>
+      <div>Сумма расходов: {sumExpenses}</div>
       {expenses.map((el) => (
         <div key={el.id} className={styles.card}>
           <p>Категория: {el.categoryId}</p>
@@ -23,6 +33,6 @@ export default function Expences() {
           <p>Комментрий: {el.comment}</p>
         </div>
       ))}
-    </ModalContext.Provider>
+    </div>
   );
 }

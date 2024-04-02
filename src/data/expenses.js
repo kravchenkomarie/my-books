@@ -12,7 +12,6 @@ export const addExpense = async (
   date,
   comment,
   selectedCategoryName,
-  setComment
 ) => {
   const response = await axios.post('http://localhost:3000/expenses', {
     price: price,
@@ -20,6 +19,5 @@ export const addExpense = async (
     categoryId: selectedCategoryName,
     comment: comment,
   });
-  // setComment('');
   return response;
 };

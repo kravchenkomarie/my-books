@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useContext } from 'react';
-import { ModalContext } from '../../App';
 import { addCategory } from '../../data/categories';
 
-export default function AddCategoryModal() {
-  const modalContext = useContext(ModalContext);
+export default function AddCategoryModal({
+  handleInputChange,
+  openCategoryModal,
+  text,
+}) {
   const [url, setUrl] = useState();
-  const isDisable = modalContext.text.trim() == '';
+  const isDisable = text.trim() == '';
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -20,8 +21,8 @@ export default function AddCategoryModal() {
     <div onClick={(e) => e.stopPropagation()}>
       <label>Название категории</label>
       <input
-        onChange={modalContext.handleInputChange}
-        value={modalContext.text}
+        onChange={handleInputChange}
+        value={text}
         type='text'
         name='text'
       ></input>
@@ -32,8 +33,8 @@ export default function AddCategoryModal() {
       <button
         disabled={isDisable}
         onClick={() => {
-          addCategory(modalContext.text, url);
-          modalContext.openModal();
+          addCategory(text, url);
+          openCategoryModal();
         }}
       >
         Добавить категорию

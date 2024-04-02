@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getCategory } from '../../data/categories';
 import AddCategoryModal from '../Modals/AddCategoryModal';
-import { ModalContext } from '../../App';
 import styles from './styles.module.scss';
 import AddExpensesModal from '../Modals/AddExpensesModal';
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isExpensesModalOpen, setIsExpensesModalOpen] = useState(false);
   const [expenses, setExpenses] = useState(false);
   const [date, setDate] = useState('');
   const [sum, setSum] = useState('');
@@ -15,25 +15,20 @@ export default function Categories() {
   const [comment, setComment] = useState('');
   const [selectedCategoryName, setSelectedCategoryName] = useState('');
 
-  const openModal = () => {
-    setIsModalOpen((prev) => !prev);
+  const openCategoryModal = () => {
+    setIsCategoryModalOpen((prev) => !prev);
+  };
+
+  const openExpensesModal = (categoryName) => {
+    setIsExpensesModalOpen((prev) => !prev);
+    setSelectedCategoryName(categoryName);
   };
 
   useEffect(() => {
     getCategory().then((res) => {
       setCategories(res.data);
     });
-  }, []);
-
-  // const addExpenses = (categoryName) => {
-  //   setSelectedCategoryName(categoryName);
-  //   setExpenses((prev) => !prev);
-  // }
-
-  const handleAddExpenses = (categoryName) => {
-    setSelectedCategoryName(categoryName);
-    setExpenses(true);
-  };
+  }, [categories]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,28 +46,14 @@ export default function Categories() {
     }
   };
 
-
   return (
-    <ModalContext.Provider
-      value={{
-        // addExpenses,
-        handleInputChange,
-        date,
-        sum,
-        text,
-        openModal,
-        comment,
-        selectedCategoryName,
-        // categoryName,
-        // setComment,
-      }}
-    >
+    <>
       <div>Выберите категорию</div>
       <div>
         {categories.map((el) => (
           <div
             key={el.id}
-            onClick={() => handleAddExpenses(el.name)}
+            onClick={() => openExpensesModal(el.name)}
             className={styles.card}
           >
             <p>{el.name}</p>
@@ -80,15 +61,24 @@ export default function Categories() {
           </div>
         ))}
 
-        {expenses && (
-          <AddExpensesModal selectedCategoryName={selectedCategoryName} />
+        {isExpensesModalOpen && (
+          <AddExpensesModal
+            selectedCategoryName={selectedCategoryName}
+            openExpensesModal={openExpensesModal}
+          />
         )}
-        {isModalOpen && <AddCategoryModal />}
+        {isCategoryModalOpen && (
+          <AddCategoryModal
+            handleInputChange={handleInputChange}
+            openCategoryModal={openCategoryModal}
+            text={text}
+          />
+        )}
 
-        {!isModalOpen && (
-          <button onClick={openModal}>Добавить категорию</button>
+        {!isCategoryModalOpen && (
+          <button onClick={openCategoryModal}>Добавить категорию</button>
         )}
       </div>
-    </ModalContext.Provider>
+    </>
   );
 }

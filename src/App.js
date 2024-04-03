@@ -13,7 +13,7 @@ export const ModalContext = React.createContext();
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter className='main'>
         <Header />
         <Routes>
           <Route path='/categories' element={<Categories />}></Route>

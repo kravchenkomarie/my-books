@@ -1,42 +1,19 @@
 {
   "expenses": [
     {
-      "id": "1",
-      "price": "3000",
-      "categoryId": "1",
-      "comment": "Бензин"
+      "id": "c8c6",
+      "price": "333",
+      "date": "2024-04-18",
+      "categoryId": "Мода",
+      "comment": ""
     },
     {
-      "id": "2",
-      "price": "50000",
-      "categoryId": "1",
-      "comment": "Подвеска"
-    },
-    {
-      "id": "3",
-      "price": "21000",
-      "categoryId": "3",
-      "comment": "Кафешка"
-    },
-    {
-      "id": "4",
-      "price": "350000",
-      "categoryId": "2",
-      "comment": "Билеты"
-    },
-    {
-      "id": "5",
-      "price": "400000",
-      "categoryId": "2",
-      "comment": "Путевка"
-    },
-
-    {
-      "id": "603a",
-      "price": "23",
-      "date": "2024-03-29",
-      "categoryId": "Автомобиль",
-      "comment": "комм"
+      "id": "bb71",
+      "price": "120",
+      "date": "2024-04-03",
+      "categoryId": 1712169383886,
+      "categoryName": "Автомобиль",
+      "comment": "авто"
     }
   ],
   "category": [
@@ -54,6 +31,10 @@
       "id": "3",
       "name": "Еда",
       "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_s6W0QB6Dk7DKl_0jmGoqbtB5tK4LA6V3HA&usqp=CAU"
+    },
+    {
+      "id": "4d49",
+      "name": "Мода"
     }
   ]
 }

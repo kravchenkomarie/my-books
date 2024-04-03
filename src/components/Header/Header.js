@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import styles from './styles.module.scss';
 
 export default function Header() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -10,14 +11,16 @@ export default function Header() {
   }, [location]);
 
   return (
-    <div>
-      <Link to='/expenses'>Статистика</Link>
-      <Link to='/categories'>Расходы</Link>
-      <Link>Доходы</Link>
-      {/* <Link to='/categories'>Категории</Link> */}
-      <Link to='/about'>О нас</Link>
-      {/* <button onClick={() => navigate('/')}>Главная</button>
-      <button onClick={() => navigate(-1)}>Назад</button> */}
+    <div className={styles.header}>
+      <Link className={styles.headerLink} to='/expenses'>
+        Расходы
+      </Link>
+      <Link className={styles.headerLink} to='/categories'>
+        Добавить расходы
+      </Link>
+      <Link className={styles.headerLink} to='/about'>
+        О нас
+      </Link>
     </div>
   );
 }

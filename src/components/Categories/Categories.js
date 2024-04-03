@@ -3,6 +3,7 @@ import { getCategory } from '../../data/categories';
 import AddCategoryModal from '../Modals/AddCategoryModal';
 import styles from './styles.module.scss';
 import AddExpensesModal from '../Modals/AddExpensesModal';
+import { PlusIcon } from './PlusIcon';
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -48,8 +49,7 @@ export default function Categories() {
 
   return (
     <>
-      <div>Выберите категорию</div>
-      <div>
+      <div className={styles.categories}>
         {categories.map((el) => (
           <div
             key={el.id}
@@ -76,7 +76,10 @@ export default function Categories() {
         )}
 
         {!isCategoryModalOpen && (
-          <button onClick={openCategoryModal}>Добавить категорию</button>
+          <button className={styles.button} onClick={openCategoryModal}>
+            <PlusIcon />
+            Добавить категорию
+          </button>
         )}
       </div>
     </>

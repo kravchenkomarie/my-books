@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './styles.module.scss';
 import { getExpenses } from '../../data/expenses';
 
@@ -20,14 +21,27 @@ export default function Expences() {
     setSumExpenses(total);
   }, [expenses]);
 
+  const handleDeleteExpense = (id) => {
+    axios
+      .delete(`http://localhost:3000/expenses/${id}`)
+      .then(() => {
+        const updatedExpenses = expenses.filter((el) => el.id !== id);
+        setExpenses(updatedExpenses);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <div>
+    <div className={styles.expenses}>
       <div>Фильтры</div>
       <div className={styles.title}>Расходы</div>
       <div>Сумма расходов: {sumExpenses}</div>
       {expenses.map((el) => (
         <div key={el.id} className={styles.card}>
-          <p>Категория: {el.categoryId}</p>
+          <button onClick={() => handleDeleteExpense(el.id)}>x</button>
+          <p>Категория: {el.categoryName}</p>
           <p>Сумма: {el.price}</p>
           <p>Дата: {el.date}</p>
           <p>Комментрий: {el.comment}</p>

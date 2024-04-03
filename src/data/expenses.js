@@ -11,12 +11,13 @@ export const addExpense = async (
   price,
   date,
   comment,
-  selectedCategoryName,
+  selectedCategoryName
 ) => {
   const response = await axios.post('http://localhost:3000/expenses', {
     price: price,
     date: date,
-    categoryId: selectedCategoryName,
+    categoryId: Date.now(),
+    categoryName: selectedCategoryName,
     comment: comment,
   });
   return response;

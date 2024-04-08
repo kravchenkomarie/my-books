@@ -1,24 +1,42 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.scss';
 
 export default function Header() {
-  // const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation;
+  const [activeTab, setActiveTab] = useState(location.pathname);
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className={styles.header}>
-      <Link className={styles.headerLink} to='/expenses'>
+      <Link
+        className={`${styles.headerLink} ${
+          activeTab === '/' ? styles.active : ''
+        }`}
+        to='/'
+        onClick={() => handleTabClick('/')}
+      >
         Расходы
       </Link>
-      <Link className={styles.headerLink} to='/categories'>
+      <Link
+        className={`${styles.headerLink} ${
+          activeTab === '/categories' ? styles.active : ''
+        }`}
+        to='/categories'
+        onClick={() => handleTabClick('/categories')}
+      >
         Добавить расходы
       </Link>
-      <Link className={styles.headerLink} to='/about'>
+      <Link
+        className={`${styles.headerLink} ${
+          activeTab === '/about' ? styles.active : ''
+        }`}
+        to='/about'
+        onClick={() => handleTabClick('/about')}
+      >
         О нас
       </Link>
     </div>

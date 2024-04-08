@@ -9,11 +9,7 @@ export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [isExpensesModalOpen, setIsExpensesModalOpen] = useState(false);
-  const [expenses, setExpenses] = useState(false);
-  const [date, setDate] = useState('');
-  const [sum, setSum] = useState('');
   const [text, setText] = useState('');
-  const [comment, setComment] = useState('');
   const [selectedCategoryName, setSelectedCategoryName] = useState('');
 
   const openCategoryModal = () => {
@@ -33,22 +29,13 @@ export default function Categories() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'sum') {
-      setSum(value);
-    }
-    if (name === 'date') {
-      setDate(value);
-    }
     if (name === 'text') {
       setText(value);
-    }
-    if (name === 'comment') {
-      setComment(value);
     }
   };
 
   return (
-    <>
+    <div>
       <div className={styles.categories}>
         {categories.map((el) => (
           <div
@@ -82,6 +69,6 @@ export default function Categories() {
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 }

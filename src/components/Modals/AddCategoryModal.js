@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addCategory } from '../../data/categories';
+import styles from './styles.module.scss';
 
 export default function AddCategoryModal({
   handleInputChange,
@@ -18,27 +19,39 @@ export default function AddCategoryModal({
   };
 
   return (
-    <div onClick={(e) => e.stopPropagation()}>
-      <label>Название категории</label>
-      <input
-        onChange={handleInputChange}
-        value={text}
-        type='text'
-        name='text'
-      ></input>
+    <div
+      onClick={() => {
+        openCategoryModal(false);
+      }}
+      className={styles.categoryModal}
+    >
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.buttonBlock}>
+          <button onClick={() => openCategoryModal(false)}>x</button>
+        </div>
+        <p className={styles.title}>Название категории</p>
 
-      <input onChange={handleFileChange} type='file'></input>
-      <img src={url} alt='' />
+        <input
+          onChange={handleInputChange}
+          value={text}
+          type='text'
+          name='text'
+          className={styles.fileInput}
+        ></input>
 
-      <button
-        disabled={isDisable}
-        onClick={() => {
-          addCategory(text, url);
-          openCategoryModal();
-        }}
-      >
-        Добавить категорию
-      </button>
+        <input onChange={handleFileChange} type='file'></input>
+
+        <button
+          disabled={isDisable}
+          onClick={() => {
+            addCategory(text, url);
+            openCategoryModal();
+          }}
+          className={styles.modalButton}
+        >
+          Добавить категорию
+        </button>
+      </div>
     </div>
   );
 }

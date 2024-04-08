@@ -6,6 +6,11 @@
   margin: 3rem;
 }
 
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card {
   width: 12rem;
   background-color: antiquewhite;
@@ -13,4 +18,21 @@
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 1rem;
+}
+
+.sortBlock {
+  display: flex;
+}
+
+.sortByOptions {
+  margin-right: 2rem;
+}
+
+.sortByOptions select,
+.sortByCategory select {
+  margin-left: 1rem;
+}
+
+.sum {
+  margin: 2rem 0;
 }

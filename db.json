@@ -1,40 +1,63 @@
 {
   "expenses": [
     {
-      "id": "c8c6",
-      "price": "333",
-      "date": "2024-04-18",
-      "categoryId": "Мода",
-      "comment": ""
+      "id": "99a0",
+      "price": "190",
+      "date": "2024-04-01",
+      "categoryId": 1712605694971,
+      "categoryName": "Автомобиль",
+      "comment": "Новые колеса"
     },
     {
-      "id": "bb71",
-      "price": "120",
-      "date": "2024-04-03",
-      "categoryId": 1712169383886,
+      "id": "4620",
+      "price": "27",
+      "date": "2024-02-29",
+      "categoryId": 1712605808298,
+      "categoryName": "Животные",
+      "comment": "Корм для котика"
+    },
+    {
+      "id": "bd62",
+      "price": "35",
+      "date": "2024-03-21",
+      "categoryId": 1712605818205,
+      "categoryName": "Животные",
+      "comment": "Когтеточка"
+    },
+    {
+      "id": "7d90",
+      "price": "34",
+      "date": "2024-03-21",
+      "categoryId": 1712605829004,
       "categoryName": "Автомобиль",
-      "comment": "авто"
+      "comment": "Бенз"
     }
   ],
   "category": [
     {
       "id": "1",
       "name": "Автомобиль",
-      "imgUrl": "https://img.freepik.com/premium-vector/car-icon-isolated-on-a-white-background_646737-2503.jpg"
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Grand_Theft_Auto_Vice_City_logo.svg/698px-Grand_Theft_Auto_Vice_City_logo.svg.png"
     },
     {
       "id": "2",
       "name": "Путешествия",
-      "imgUrl": "https://cdn-icons-png.flaticon.com/512/5087/5087450.png"
+      "imgUrl": "https://cdn-icons-png.flaticon.com/512/201/201623.png"
     },
     {
       "id": "3",
       "name": "Еда",
-      "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_s6W0QB6Dk7DKl_0jmGoqbtB5tK4LA6V3HA&usqp=CAU"
+      "imgUrl": "https://img.freepik.com/premium-vector/ramen-noodle-japanese-food-flat_123553-338.jpg?w=2000"
     },
     {
-      "id": "4d49",
-      "name": "Мода"
+      "id": "5dfb",
+      "name": "Косметика",
+      "imgUrl": "blob:http://localhost:8080/28d8218f-c29a-409f-83fd-497f6b2d612c"
+    },
+    {
+      "id": "5afc",
+      "name": "Животные",
+      "imgUrl": "blob:http://localhost:8080/12336b39-efab-4bb3-8838-12919892c755"
     }
   ]
 }

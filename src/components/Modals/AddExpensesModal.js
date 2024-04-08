@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addExpense } from '../../data/expenses';
+import styles from './styles.module.scss';
 
 export default function AddExpensesModal({
   selectedCategoryName,
@@ -15,30 +16,50 @@ export default function AddExpensesModal({
   };
 
   return (
-    <div>
-      <div onClick={(e) => e.stopPropagation()}>
-        <label>Сумма</label>
+    <div
+      onClick={() => {
+        openExpensesModal(false);
+      }}
+      className={styles.expensesModal}
+    >
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.buttonBlock}>
+          <button onClick={() => openExpensesModal(false)}>x</button>
+        </div>
+        <p className={styles.titleExpenses}>Сумма</p>
         <input
           type='number'
           name='sum'
           value={sum}
           onChange={(e) => setSum(e.target.value)}
+          className={styles.fileInputExpenses}
         ></input>
-        <label>Дата</label>
+        <br />
+        <p className={styles.titleExpenses}>Дата</p>
         <input
           type='date'
           name='date'
           value={date}
           onChange={(e) => setDate(e.target.value)}
+          className={styles.fileInputExpenses}
         ></input>
-        <label>Комментрий</label>
+        <br />
+
+        <p className={styles.titleExpenses}>Комментрий</p>
         <input
           type='text'
           name='comment'
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          className={styles.fileInputExpenses}
         ></input>
-        <button onClick={handleAddExpense}>Добавить расход</button>
+        <br />
+        <button
+          onClick={handleAddExpense}
+          className={styles.modalButtonExpenses}
+        >
+          Добавить расход
+        </button>
       </div>
     </div>
   );

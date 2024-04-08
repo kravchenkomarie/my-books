@@ -1,5 +1,46 @@
 {
-  "expenses": [],
+  "expenses": [
+    {
+      "id": "9fb6",
+      "price": "150",
+      "date": "07.04.2024",
+      "categoryId": 1712608213266,
+      "categoryName": "Автомобиль",
+      "comment": "Бенз"
+    },
+    {
+      "id": "0f49",
+      "price": "1567",
+      "date": "03.04.2024",
+      "categoryId": 1712608235112,
+      "categoryName": "Путешествия",
+      "comment": "Билеты на Бали :)"
+    },
+    {
+      "id": "799d",
+      "price": "453",
+      "date": "08.03.2024",
+      "categoryId": 1712608246198,
+      "categoryName": "Путешествия",
+      "comment": "Круиз"
+    },
+    {
+      "id": "26b8",
+      "price": "7",
+      "date": "02.02.2024",
+      "categoryId": 1712608268010,
+      "categoryName": "Еда",
+      "comment": "Нори"
+    },
+    {
+      "id": "7ee4",
+      "price": "120",
+      "date": "05.04.2024",
+      "categoryId": 1712608297068,
+      "categoryName": "Животные",
+      "comment": "Корм для котика"
+    }
+  ],
   "category": [
     {
       "id": "1",
@@ -15,6 +56,16 @@
       "id": "3",
       "name": "Еда",
       "imgUrl": "https://img.freepik.com/premium-vector/ramen-noodle-japanese-food-flat_123553-338.jpg?w=2000"
+    },
+    {
+      "id": "85cb",
+      "name": "Косметика",
+      "imgUrl": "blob:http://localhost:8080/87133e14-f36a-4346-8529-eb705548c8e2"
+    },
+    {
+      "id": "9611",
+      "name": "Животные",
+      "imgUrl": "blob:http://localhost:8080/eb5297e6-9bed-4633-8a51-0da50acbf524"
     }
   ]
 }

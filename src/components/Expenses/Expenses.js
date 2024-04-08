@@ -28,13 +28,31 @@ export default function Expences() {
     return sortedExpenses;
   };
 
+  const filterAndSortExpenses = () => {
+    let filteredExpenses = expenses;
+
+    if (selectedCategorySortOption !== 'default') {
+      filteredExpenses = filteredExpenses.filter(
+        (el) => el.categoryName === selectedCategorySortOption
+      );
+    }
+
+    if (searchByComm) {
+      filteredExpenses = filteredExpenses.filter((el) =>
+        el.comment.toLowerCase().includes(searchByComm.toLowerCase())
+      );
+    }
+
+    setSortedExpenses(sortExpenses(selectedSortOption, filteredExpenses));
+  };
+
   const handleDeleteExpense = (id) => {
     axios
       .delete(`http://localhost:3000/expenses/${id}`)
       .then(() => {
         const updatedExpenses = expenses.filter((el) => el.id !== id);
         setExpenses(updatedExpenses);
-        setSortedExpenses(sortExpenses(selectedSortOption, updatedExpenses));
+        filterAndSortExpenses();
       })
       .catch((error) => {
         console.error(error);
@@ -51,46 +69,18 @@ export default function Expences() {
   useEffect(() => {
     getCategory().then((res) => {
       setCategory(res.data);
-      if (selectedCategorySortOption !== 'default') {
-        setSortedExpenses(
-          sortExpenses(
-            selectedSortOption,
-            expenses.filter(
-              (el) => el.categoryName === selectedCategorySortOption
-            )
-          )
-        );
-      } else {
-        setSortedExpenses(sortExpenses(selectedSortOption, expenses));
-      }
     });
-  }, [selectedCategorySortOption]);
-
-  useEffect(() => {
-    if (selectedCategorySortOption !== 'default') {
-      const filteredExpenses = expenses.filter(
-        (el) => el.categoryName === selectedCategorySortOption
-      );
-      setSortedExpenses(sortExpenses(selectedSortOption, filteredExpenses));
-    } else {
-      setSortedExpenses(sortExpenses(selectedSortOption, expenses));
-    }
-  }, [selectedCategorySortOption, selectedSortOption, expenses]);
+  }, []);
 
   useEffect(() => {
     getExpenses().then((res) => {
       setExpenses(res.data);
-
-      if (selectedCategorySortOption !== 'default' && res.data.length > 0) {
-        const filteredExpenses = res.data.filter(
-          (el) => el.categoryName === selectedCategorySortOption
-        );
-        setSortedExpenses(sortExpenses(selectedSortOption, filteredExpenses));
-      } else {
-        setSortedExpenses(sortExpenses(selectedSortOption, res.data));
-      }
     });
-  }, [selectedSortOption]);
+  }, []);
+
+  useEffect(() => {
+    filterAndSortExpenses();
+  }, [selectedSortOption, selectedCategorySortOption, searchByComm, expenses]);
 
   useEffect(() => {
     const total = expenses.reduce(

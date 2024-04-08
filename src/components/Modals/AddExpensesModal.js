@@ -10,8 +10,17 @@ export default function AddExpensesModal({
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
 
+  const formatDate = (inputDate) => {
+    const dateObj = new Date(inputDate);
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateObj.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
   const handleAddExpense = () => {
-    addExpense(sum, date, comment, selectedCategoryName, setComment);
+    const formattedDate = formatDate(date);
+    addExpense(sum, formattedDate, comment, selectedCategoryName, setComment);
     openExpensesModal();
   };
 

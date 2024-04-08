@@ -12,6 +12,7 @@ export default function Expences() {
   const [selectedSortOption, setSelectedSortOption] = useState('date');
   const [selectedCategorySortOption, setSelectedCategorySortOption] =
     useState('default');
+  const [searchByComm, setSearchByComm] = useState('');
 
   const sortExpenses = (sortOption, expensesArray) => {
     let sortedExpenses = [...expensesArray];
@@ -38,6 +39,13 @@ export default function Expences() {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleSearch = () => {
+    const filteredExpenses = expenses.filter((el) =>
+      el.comment.toLowerCase().includes(searchByComm.toLowerCase())
+    );
+    setSortedExpenses(sortExpenses(selectedSortOption, filteredExpenses));
   };
 
   useEffect(() => {
@@ -116,6 +124,18 @@ export default function Expences() {
               </option>
             ))}
           </select>
+        </div>
+        <div className={styles.search}>
+          Поиск:
+          <input
+            type='text'
+            placeholder='Поиск по комментарию'
+            value={searchByComm}
+            onChange={(e) => {
+              setSearchByComm(e.target.value);
+              handleSearch();
+            }}
+          />
         </div>
       </div>
 

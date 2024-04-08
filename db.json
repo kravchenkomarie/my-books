@@ -1,38 +1,5 @@
 {
-  "expenses": [
-    {
-      "id": "99a0",
-      "price": "190",
-      "date": "2024-04-01",
-      "categoryId": 1712605694971,
-      "categoryName": "Автомобиль",
-      "comment": "Новые колеса"
-    },
-    {
-      "id": "4620",
-      "price": "27",
-      "date": "2024-02-29",
-      "categoryId": 1712605808298,
-      "categoryName": "Животные",
-      "comment": "Корм для котика"
-    },
-    {
-      "id": "bd62",
-      "price": "35",
-      "date": "2024-03-21",
-      "categoryId": 1712605818205,
-      "categoryName": "Животные",
-      "comment": "Когтеточка"
-    },
-    {
-      "id": "7d90",
-      "price": "34",
-      "date": "2024-03-21",
-      "categoryId": 1712605829004,
-      "categoryName": "Автомобиль",
-      "comment": "Бенз"
-    }
-  ],
+  "expenses": [],
   "category": [
     {
       "id": "1",

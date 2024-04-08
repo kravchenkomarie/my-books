@@ -15,16 +15,6 @@
       "id": "3",
       "name": "Еда",
       "imgUrl": "https://img.freepik.com/premium-vector/ramen-noodle-japanese-food-flat_123553-338.jpg?w=2000"
-    },
-    {
-      "id": "5dfb",
-      "name": "Косметика",
-      "imgUrl": "blob:http://localhost:8080/28d8218f-c29a-409f-83fd-497f6b2d612c"
-    },
-    {
-      "id": "5afc",
-      "name": "Животные",
-      "imgUrl": "blob:http://localhost:8080/12336b39-efab-4bb3-8838-12919892c755"
     }
   ]
 }

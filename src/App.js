@@ -1,29 +1,112 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import About from './components/About/About';
 import Error from './components/Error/Error';
-import Categories from './components/Categories/Categories';
-import Expenses from './components/Expenses/Expenses';
+import Books from './components/Books/Books';
+import Favorites from './components/Favorites/Favorites';
 
-export const ModalContext = React.createContext();
+import { getBooksDetails } from './data/books';
+
+const themes = {
+  light: {
+    background: '#0a1756',
+    color: '#ffffff',
+    fontStyle: 'italic',
+  },
+  dark: {
+    background: '#ffffff',
+    color: '#0a1756',
+    fontStyle: 'normal',
+  },
+};
+
+export const ThemeContext = React.createContext(themes.light);
 
 function App() {
+  const [theme, setTheme] = useState(themes.light);
+  const switchTheme = () => {
+    if (theme === themes.dark) {
+      setTheme(themes.light);
+    } else {
+      setTheme(themes.dark);
+    }
+  };
+
+  const [favoriteBooks, setFavoriteBooks] = React.useState([]);
+  const [bookDetails, setBookDetails] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
+  const addToFavorite = (book) => {
+    setFavoriteBooks((prevBooks) => [...prevBooks, book]);
+  };
+
+  const removeFromFavorite = (book) => {
+    setFavoriteBooks((prevBooks) =>
+      prevBooks.filter((favBook) => favBook.id !== book.id)
+    );
+  };
+
+  const handleBookClick = (id) => {
+    if (!id) {
+      setOpenModal(true);
+    }
+
+    getBooksDetails(id)
+      .then((res) => {
+        setBookDetails(res.data);
+        setOpenModal(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <>
-      <BrowserRouter className='main'>
-        <Header />
-        <Routes>
-          <Route path='/categories' element={<Categories />}></Route>
-          <Route path='/' element={<Expenses />}>
-            Расходы
-          </Route>
-          <Route path='about' element={<About />}></Route>
-          <Route path='*' element={<Error />}></Route>
-        </Routes>
+    <ThemeContext.Provider value={{ theme, themes, setTheme, switchTheme }}>
+      <BrowserRouter>
+        <div
+          style={{
+            background: theme.background,
+            color: theme.color,
+            fontStyle: theme.fontStyle,
+          }}
+        >
+          <Header />
+          <Routes>
+            <Route
+              path='/books'
+              element={
+                <Books
+                  addToFavorite={addToFavorite}
+                  handleBookClick={handleBookClick}
+                  bookDetails={bookDetails}
+                  openModal={openModal}
+                  setOpenModal={setOpenModal}
+                  removeFromFavorite={removeFromFavorite}
+                />
+              }
+            ></Route>
+            <Route
+              path='/'
+              element={
+                <Favorites
+                  favoriteBooks={favoriteBooks}
+                  handleBookClick={handleBookClick}
+                  bookDetails={bookDetails}
+                  openModal={openModal}
+                  setOpenModal={setOpenModal}
+                  removeFromFavorite={removeFromFavorite}
+                />
+              }
+            ></Route>
+            <Route path='about' element={<About />}></Route>
+            <Route path='/error' element={<Error />}></Route>
+          </Routes>
+        </div>
       </BrowserRouter>
-    </>
+    </ThemeContext.Provider>
   );
 }
 

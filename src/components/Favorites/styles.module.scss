@@ -45,3 +45,28 @@
 input {
   min-width: 9rem;
 }
+
+.image {
+  height: 14rem;
+  width: 10rem;
+}
+
+.books {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book {
+  background-color: rgba(229, 229, 229, 0.2);
+  border-radius: 1rem;
+  border: 1px solid rgba(191, 191, 191, 0.2);
+  box-shadow: 0px 0px 10px rgba(83, 98, 124, 0.2);
+  margin: 1rem;
+  padding: 1rem;
+  width: 15rem;
+}
+
+.book:hover {
+  background-color: white;
+  cursor: pointer;
+}

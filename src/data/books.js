@@ -7,7 +7,6 @@ export const getBooks = async () => {
 
 export const getBooksDetails = async (id) => {
   const response = await axios.get(`https://www.dbooks.org/api/book/${id}`);
-  console.log(response);
   return response;
 };
 

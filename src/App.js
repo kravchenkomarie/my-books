@@ -6,19 +6,19 @@ import About from './components/About/About';
 import Error from './components/Error/Error';
 import Books from './components/Books/Books';
 import Favorites from './components/Favorites/Favorites';
-
 import { getBooksDetails } from './data/books';
+import Reviews from './components/Reviews/Reviews';
 
 const themes = {
   light: {
-    background: '#0a1756',
-    color: '#ffffff',
-    fontStyle: 'italic',
-  },
-  dark: {
     background: '#ffffff',
     color: '#0a1756',
     fontStyle: 'normal',
+  },
+  dark: {
+    background: '#0a1756',
+    color: '#ffffff',
+    fontStyle: 'italic',
   },
 };
 
@@ -46,6 +46,16 @@ function App() {
     setFavoriteBooks((prevBooks) =>
       prevBooks.filter((favBook) => favBook.id !== book.id)
     );
+  };
+
+  const toggleFavorite = (book) => {
+    const isFavorite = favoriteBooks.some((favBook) => favBook.id === book.id);
+
+    if (isFavorite) {
+      removeFromFavorite(book);
+    } else {
+      addToFavorite(book);
+    }
   };
 
   const handleBookClick = (id) => {
@@ -76,20 +86,11 @@ function App() {
           <Header />
           <Routes>
             <Route
-              path='/books'
-              element={
-                <Books
-                  addToFavorite={addToFavorite}
-                  handleBookClick={handleBookClick}
-                  bookDetails={bookDetails}
-                  openModal={openModal}
-                  setOpenModal={setOpenModal}
-                  removeFromFavorite={removeFromFavorite}
-                />
-              }
+              path='/'
+              element={<Books favoriteBooks={favoriteBooks} toggleFavorite={toggleFavorite} />}
             ></Route>
             <Route
-              path='/'
+              path='/favorites'
               element={
                 <Favorites
                   favoriteBooks={favoriteBooks}
@@ -101,6 +102,7 @@ function App() {
                 />
               }
             ></Route>
+            <Route path='/book/:id' element={<Reviews />}></Route>
             <Route path='about' element={<About />}></Route>
             <Route path='/error' element={<Error />}></Route>
           </Routes>

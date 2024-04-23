@@ -20,18 +20,18 @@ export default function Header() {
       <div className={styles.header}>
         <Link
           className={`${styles.headerLink} ${
-            activeTab === '/books' ? styles.active : ''
+            activeTab === '/' ? styles.active : ''
           }`}
-          to='/books'
-          onClick={() => handleTabClick('/books')}
+          to='/'
+          onClick={() => handleTabClick('/')}
         >
           Книги
         </Link>
         <Link
           className={`${styles.headerLink} ${
-            activeTab === '/' ? styles.active : ''
+            activeTab === '/favorites' ? styles.active : ''
           }`}
-          to='/'
+          to='/favorites'
           onClick={() => handleTabClick('/')}
         >
           Избранное

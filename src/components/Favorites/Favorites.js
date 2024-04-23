@@ -6,7 +6,6 @@ export default function Favorites({
   handleBookClick,
   removeFromFavorite,
 }) {
-  console.log(777, favoriteBooks);
   return (
     <div>
       {favoriteBooks?.map((el) => {

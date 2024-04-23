@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getBooks, getBooksDetails } from '../../data/books';
 import BookDetailsModal from '../Modals/BookDetailsModal';
 import styles from './styles.module.scss';
 
-export default function Books({ addToFavorite }) {
+export default function Books({ toggleFavorite, favoriteBooks }) {
   const [books, setBooks] = useState([]);
   const [bookDetails, setBookDetails] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -44,10 +45,22 @@ export default function Books({ addToFavorite }) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              addToFavorite(el);
+              toggleFavorite(el);
             }}
           >
-            избранное
+            {favoriteBooks.some((favBook) => favBook.id === el.id)
+              ? 'Удалить из избранного'
+              : 'Добавить в избранное'}
+          </button>
+
+          <Link to={`book/${el.id}`}>Оценить</Link>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            хочу прочитать
           </button>
         </div>
       ))}
